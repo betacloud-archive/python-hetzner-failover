@@ -1,10 +1,14 @@
 Script to work with Hetzner failover IP addresses
 =================================================
 
-Installation
+Requirements
 ------------
 
-tbd
+* oslo.conf <https://github.com/openstack/oslo.conf>
+* oslo.log <https://github.com/openstack/oslo.log>
+* Requests <http://docs.python-requests.org/en/master/>
+* tabulate <https://pypi.python.org/pypi/tabulate>
+
 
 Implemented commands
 --------------------
@@ -60,7 +64,11 @@ route
 API Rate Limits
 ---------------
 
-Hetzner robot webservice is rate limited at 100 queries per 1 hour window.
+Hetzner robot webservice is rate limited.
+
+* 100 queries per 1 hour window for ``GET /failover`` (``list`` command)
+* 100 queries per 1 hour window for ``GET /failover/<failover-address>`` (``show`` command)
+* 50 queries per 1 hour window for ``POST /failover/<failover-address>`` (``route`` command)
 
 
 Documentation
@@ -68,3 +76,12 @@ Documentation
 
 * http://wiki.hetzner.de/index.php/Failover
 * http://wiki.hetzner.de/index.php/Robot_Webservice#Failover
+
+Development
+-----------
+
+.. code::
+
+   $ virtualenv .venv
+   $ source .venv/bin/activate
+   $ pip install -r requirements.txt
