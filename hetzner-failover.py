@@ -12,6 +12,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import time
+
 from oslo_config import cfg
 from oslo_log import log
 import requests
@@ -38,7 +40,23 @@ def output(o):
 
 
 def route():
-    pass
+    start = time.time()
+    data = {'active_server_ip': CONF.command.server_address}
+    result = requests.post('https://robot-ws.your-server.de/failover/%s' %
+                           CONF.command.failover_address,
+                           data = data, auth=(CONF.username, CONF.password))
+    done = time.time()
+    elapsed = done - start
+    print('elapsed time for failover: %s seconds' % elapsed)
+    if result.status_code == 404:
+        LOG.error('failover IP address %s not found' %
+                  CONF.command.failover_address)
+    elif result.status_code == 200:
+        t = tabulate([result.json().get('failover', [])],
+                     headers='keys', tablefmt='grid')
+        output(t)
+    else:
+        error(result)
 
 
 def list():
@@ -79,6 +97,13 @@ def add_command_parsers(subparsers):
     parser.add_argument('failover_address', default=None,
                         help='')
     parser.set_defaults(func=show)
+
+    parser = subparsers.add_parser('route')
+    parser.add_argument('failover_address', default=None,
+                        help='')
+    parser.add_argument('server_address', default=None,
+                        help='')
+    parser.set_defaults(func=route)
 
 commands = cfg.SubCommandOpt('command', title='Commands',
                              help='Show available commands.',

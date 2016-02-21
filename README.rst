@@ -46,7 +46,15 @@ route
 
 * http://wiki.hetzner.de/index.php/Robot_Webservice#POST_.2Ffailover.2F.3Cfailover-ip.3E
 
-tbd
+.. code::
+
+   $ ./hetzner-failover.py --config-file hetzner-failover.conf route e.f.g.h i.j.k.l
+   elapsed time for failover: 28.0130250454 seconds
+   +------------------+---------+-----------------+---------------+-----------+
+   | active_server_ip | ip      | netmask         | server_number | server_ip |
+   +==================+=========+=================+===============+===========+
+   | i.j.k.l          | e.f.g.h | 255.255.255.255 |        123456 | a.b.c.d   |
+   +------------------+---------+-----------------+---------------+-----------+
 
 
 API Rate Limits
