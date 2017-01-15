@@ -13,7 +13,6 @@ Requirements
 Implemented commands
 --------------------
 
-
 list
 ~~~~
 
@@ -21,7 +20,7 @@ list
 
 .. code::
 
-   $ ./hetzner-failover.py --config-file hetzner-failover.conf list
+   $ python src/hetzner-failover.py --config-file hetzner-failover.conf list
    +------------------+---------+-----------------+---------------+-----------+
    | active_server_ip | ip      | netmask         | server_number | server_ip |
    +==================+=========+=================+===============+===========+
@@ -38,7 +37,7 @@ show
 
 .. code::
 
-   $ ./hetzner-failover.py --config-file hetzner-failover.conf show e.f.g.h
+   $ python src/hetzner-failover.py --config-file hetzner-failover.conf show e.f.g.h
    +------------------+---------+-----------------+---------------+-----------+
    | active_server_ip | ip      | netmask         | server_number | server_ip |
    +==================+=========+=================+===============+===========+
@@ -52,7 +51,7 @@ route
 
 .. code::
 
-   $ ./hetzner-failover.py --config-file hetzner-failover.conf route e.f.g.h i.j.k.l
+   $ python src/hetzner-failover.py --config-file hetzner-failover.conf route e.f.g.h i.j.k.l
    elapsed time for failover: 28.0130250454 seconds
    +------------------+---------+-----------------+---------------+-----------+
    | active_server_ip | ip      | netmask         | server_number | server_ip |
